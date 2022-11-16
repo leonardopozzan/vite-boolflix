@@ -1,0 +1,9 @@
+@mixin dflex($option : 'center'){
+    display: flex;
+    align-items: center;
+    @if($option == 'center'){
+        justify-content: center;
+    }@else if($option == 'between'){
+        justify-content: space-between;
+    }
+}
