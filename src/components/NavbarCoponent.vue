@@ -1,8 +1,8 @@
 <template>
-    <header>
+    <header class="sticky-top position-sticky">
         <nav class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center ms-5">
-                <div class="img-box"><img src="/img/boolfix.png"></div>
+                <div class="img-box"><img src="/img/boolflix.png"></div>
                 <ul class="d-flex m-0">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Serie TV</a></li>
@@ -38,7 +38,11 @@ import {store} from '../store';
 <style lang="scss" scoped>
 @use '../assets/variables' as *;
 @use '../assets/mixins' as *;
-
+header{
+    z-index: 500;
+    position: relative;
+    border-bottom: 2px solid red ;
+}
 nav{
     height: 80px;
     background-color: $black;

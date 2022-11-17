@@ -27,6 +27,6 @@ import {store} from '../store';
 
 main{
     padding-top: 100px;
-    background-color: $dark-bg;
+    background-color: black;
 }
 </style>

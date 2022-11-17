@@ -1,6 +1,6 @@
 <template>
-    <div class="title" v-show="list.length">{{title}}</div> 
-    <div class="cards">
+    <div class="title view" v-show="list.length">{{title}}</div> 
+    <div class="cards view">
         <CardComponent v-for="(item,j) in list" :key="j" :card="item"/>
     </div>
 </template>
@@ -76,4 +76,8 @@ import {store} from '../store';
     color: $white;
     margin-left: 1rem;
 }
+.view{
+        position: relative;
+        z-index: 600;
+    }
 </style>

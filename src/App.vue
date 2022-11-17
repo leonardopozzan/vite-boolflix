@@ -1,5 +1,6 @@
 <template>
   <NavbarCoponent />
+  <JumboComponent v-if="!store.options.params.query"/>
   <MainComponent />
 </template>
 
@@ -8,9 +9,11 @@ import MainComponent from './components/MainComponent.vue';
 import NavbarCoponent from './components/NavbarCoponent.vue';
 import {store} from './store';
 import axios from 'axios';
+import JumboComponent from './components/JumboComponent.vue';
 export default {
   data(){
     return{
+      store,
       options:{
         params:{
           api_key : '1829456f16e7707f91a23d5cca10ada9',
@@ -29,7 +32,7 @@ export default {
   created(){
     this.getGender();
   },
-  components: { NavbarCoponent, MainComponent }
+  components: { NavbarCoponent, MainComponent, JumboComponent }
 }
 </script>
 

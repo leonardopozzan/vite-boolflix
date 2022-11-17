@@ -45,7 +45,7 @@ import {store} from '../store'
         props:['card'],
         computed:{
             urlImage(){
-                const urlImage = (this.card.backdrop_path) ? `${store.imgUrl}${this.card.backdrop_path}` : '/img/boolfix.png';
+                const urlImage = (this.card.backdrop_path) ? `${store.imgUrl}${this.card.backdrop_path}` : '/img/boolflix.png';
                 return urlImage;
             },
             title(){
@@ -93,11 +93,14 @@ import {store} from '../store'
 @use '../assets/variables' as *;
 .my-card{
     flex-shrink: 0;
-    background-color: $dark-bg;
+    background-color: black;
     margin: 0 0.6rem;
     position: relative;
     transition: 0.5s;
     z-index: 50;
+    overflow: hidden;
+    border-radius: 0.5rem  ;
+    border-bottom: 2px solid red;
     &:hover{
         transform: scale(1.4);
         transform-origin: top left;
