@@ -73,6 +73,8 @@ import {store} from '../store'
                     flag = 'sk';             
                 } else if (flag == 'da') {
                     flag = 'dk';             
+                } else if (flag == 'xx'){
+                    flag = 'mz';
                 }
                 const flagUp = flag.toUpperCase();
                 const urlFlag = `https://www.countryflagicons.com/SHINY/32/${flagUp}.png`

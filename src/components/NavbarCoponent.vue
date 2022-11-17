@@ -11,7 +11,7 @@
                 </ul>
             </div>
             <div class="me-5">
-                <input type="text" class="me-3" placeholder="Titoli" v-model="store.options.params.query">
+                <input type="text" class="me-3" placeholder="Titoli" v-model="input">
                 <button class="btn btn-light" @click="change()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </nav>
@@ -23,13 +23,13 @@ import {store} from '../store';
     export default {
         data(){
             return{
-                store
+                store,
+                input : ''
             }
         },
         methods:{
             change(){
-                console.log(store.boolean)
-                store.boolean = !store.boolean;
+                store.options.params.query = this.input;
             }
         }
     }

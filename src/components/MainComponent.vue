@@ -1,16 +1,20 @@
 <template>
     <main>
-        <CardsComponent v-for="(el,i) in listEndPoint" :key="i" :endPoint="el" />
+        <CardsComponent v-for="(el,i) in listEndPoint" :key="i" :endPoint="el" v-if="store.options.params.query" />
+        <CardsComponent v-for="(el,j) in listTrend" :key="j" :endPoint="el" v-else />
     </main>
 </template>
 
 <script>
 import CardsComponent from './CardsComponent.vue';
+import {store} from '../store';
 
     export default {
         data(){
             return{
-                listEndPoint: ['/search/movie','/search/tv']
+                store,
+                listEndPoint: ['/search/movie','/search/tv'],
+                listTrend: ['/trending/tv/week', '/trending/movie/week' ]
             }
         },
         components:  { CardsComponent } 

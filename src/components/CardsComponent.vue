@@ -19,7 +19,7 @@ import {store} from '../store';
         },
     components: { CardComponent },
     watch: {
-        'store.boolean'(){
+        'store.options.params.query'(){
             this.getApi();
         }
     },
@@ -38,8 +38,14 @@ import {store} from '../store';
     computed:{
         title(){
             if(this.endPoint.includes('tv')){
+                if(this.endPoint.includes('trending')){
+                    return 'Trend Serie TV'
+                }
                 return 'Serie TV';
             }else if(this.endPoint.includes('movie')){
+                if(this.endPoint.includes('trending')){
+                    return 'Trend Film'
+                }
                 return 'Film';
             }
         }
