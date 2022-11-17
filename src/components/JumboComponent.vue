@@ -14,7 +14,7 @@
 
 <style lang="scss" scoped>
 .jumbo{
-    margin-top: -200px;
+    margin-top: -100px;
     height: 800px;
     position: relative;
     #myVideo {

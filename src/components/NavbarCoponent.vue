@@ -10,9 +10,9 @@
                     <li><a href="#">Nuovi e popolari</a></li>
                 </ul>
             </div>
-            <div class="me-5">
+            <div class="me-5 d-flex align-items-center">
                 <input type="text" class="me-3" placeholder="Titoli" v-model="input">
-                <button class="btn btn-light" @click="change()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="my-btn" @click="change()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </nav>
     </header>
@@ -39,7 +39,7 @@ import {store} from '../store';
 @use '../assets/variables' as *;
 @use '../assets/mixins' as *;
 header{
-    z-index: 500;
+    z-index: 700;
     position: relative;
     border-bottom: 2px solid red ;
 }
@@ -54,6 +54,26 @@ nav{
         color: $white;
         font-size: 1.2rem;
         padding-right: 1rem;
+    }
+    input{
+        background-color: $bg-dark;
+        color: $white;
+        width: 300px;
+
+        border: 0;
+        height: 40px;
+        font-size: 1.3rem;
+        border-radius: 0.3em;
+    }
+    .my-btn{
+        border-radius: 0.3em;
+        height: 40px;
+        background-color: $bg-dark;
+        padding: 0 1.5rem;
+        color: $white;
+        &:hover{
+            background-color: rgba($color: white, $alpha: 0.3);
+        }
     }
 }
 </style>
