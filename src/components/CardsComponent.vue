@@ -53,9 +53,6 @@ import {store} from '../store';
 <style lang="scss" scoped>
 @use '../assets/mixins' as *;
 @use '../assets/variables' as *;
-.cards::-webkit-scrollbar {
-    display: none;
-}
 .cards{
     height: 400px;
     overflow-x: auto;
@@ -63,6 +60,9 @@ import {store} from '../store';
     display: flex;
     align-items: flex-start;
     padding-top: 2rem;
+    &::-webkit-scrollbar {
+    display: none;
+}
 }
 .title{
     font-size: 3.5rem;

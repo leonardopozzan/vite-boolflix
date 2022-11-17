@@ -12,10 +12,15 @@
                 <div class="subtitle">
                     {{title}}
                 </div>
+                <div>
+                    <i v-for="n in 5" class="fa-star" :class="(n<=vote) ? 'fa-solid' : 'fa-regular'"></i>
+                </div>
+                <img :src="flag">
             </div>
             <div class="info col-8">
                 {{card.overview}}
             </div>
+            
         </div>
     </div>
     
@@ -42,6 +47,24 @@ import {store} from '../store'
             originalTitle(){
                 const originalTitle = (this.card.original_title) ? this.card.original_title : this.card.original_name;
                 return originalTitle;
+            },
+            vote(){
+                return Math.round(this.card.vote_average/2);
+            },
+            flag(){
+                let flag = this.card.original_language;
+                if(flag == 'en'){
+                    flag = 'gb';
+                }else if(flag == 'ja'){
+                    flag= 'jp';
+                }else if(flag == 'zh'){
+                    flag = 'cn';
+                }else if(flag == 'ko') {
+                    flag = 'kr';             
+                }
+                const flagUp = flag.toUpperCase();
+                const urlFlag = `https://www.countryflagicons.com/SHINY/64/${flagUp}.png`
+                return urlFlag;
             }
         }
     }
@@ -61,6 +84,9 @@ import {store} from '../store'
         transform: scale(1.4);
         transform-origin: top left;
         z-index: 100;
+        .description{
+            height: 90%;
+        }
     }
     .img-box{
         width: 445px;
@@ -79,6 +105,7 @@ import {store} from '../store'
         background: linear-gradient(180deg, rgba(207, 207, 207, 0) 1%, rgba(0, 0, 0, 1) 40%);
         color: $white;
         display: flex;
+        transition: 0.5s;
         .title{
             padding: 0 0.1rem 0.3rem;
             font-size: 1.3rem;
@@ -89,6 +116,10 @@ import {store} from '../store'
         }
         .info{
             padding: 0 0.5rem 0.5rem;
+            overflow: auto;
+            &::-webkit-scrollbar {
+            display: none;
+            }
         }
     }
 }
