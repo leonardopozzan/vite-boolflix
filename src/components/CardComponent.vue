@@ -25,7 +25,9 @@
 import {store} from '../store'
     export default {
         data(){
-            store
+            return{
+                store
+            }
         },
         props:['card'],
         computed:{
@@ -53,10 +55,18 @@ import {store} from '../store'
     background-color: $dark-bg;
     margin: 0 0.6rem;
     position: relative;
+    transition: 0.5s;
+    z-index: 50;
+    &:hover{
+        transform: scale(1.4);
+        transform-origin: top left;
+        z-index: 100;
+    }
     .img-box{
-    width: 445px;
+        width: 445px;
+        height: 250px;
         img{
-            height: 250px;
+            height: 100%;
             width: 100%;
         }
     }

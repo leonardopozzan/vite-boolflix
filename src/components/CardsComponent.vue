@@ -1,5 +1,5 @@
 <template>
-    <div class="title" v-show="list.length">{{title}}</div>
+    <div class="title" v-show="list.length">{{title}}</div> 
     <div class="cards">
         <CardComponent v-for="(item,j) in list" :key="j" :card="item"/>
     </div>
@@ -38,9 +38,9 @@ import {store} from '../store';
     computed:{
         title(){
             if(this.endPoint.includes('tv')){
-                return 'Serie TV'
+                return 'Serie TV';
             }else if(this.endPoint.includes('movie')){
-                return 'Film'
+                return 'Film';
             }
         }
     },
@@ -53,12 +53,16 @@ import {store} from '../store';
 <style lang="scss" scoped>
 @use '../assets/mixins' as *;
 @use '../assets/variables' as *;
-
+.cards::-webkit-scrollbar {
+    display: none;
+}
 .cards{
-    height: 270px;
-    overflow: auto;
+    height: 400px;
+    overflow-x: auto;
+    overflow-y:initial;
     display: flex;
-    margin-bottom: 100px;
+    align-items: flex-start;
+    padding-top: 2rem;
 }
 .title{
     font-size: 3.5rem;

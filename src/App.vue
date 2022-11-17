@@ -6,12 +6,10 @@
 <script>
 import MainComponent from './components/MainComponent.vue';
 import NavbarCoponent from './components/NavbarCoponent.vue';
-import {store} from './store';
-import axios from 'axios';
+// import axios from 'axios';
   export default {
     data(){
       return{
-        store
       }
     },
     methods:{

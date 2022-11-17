@@ -1,8 +1,10 @@
+@use './variables' as *;
 $fa-font-path : "./webfonts";
-@import '/node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss';
-@import '/node_modules/@fortawesome/fontawesome-free/scss/brands.scss';
-@import '/node_modules/@fortawesome/fontawesome-free/scss/regular.scss';
-@import '/node_modules/@fortawesome/fontawesome-free/scss/solid.scss';
+@import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '@fortawesome/fontawesome-free/scss/brands.scss';
+@import '@fortawesome/fontawesome-free/scss/regular.scss';
+@import '@fortawesome/fontawesome-free/scss/solid.scss';
+@import 'bootstrap/scss/bootstrap.scss';
 
 *{
     margin: 0;
@@ -10,7 +12,7 @@ $fa-font-path : "./webfonts";
     box-sizing: border-box;
 }
 body{
-    background-color: black;
+    background-color: $dark-bg;
 }
 ul{
     list-style: none;
