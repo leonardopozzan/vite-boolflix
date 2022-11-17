@@ -54,7 +54,7 @@ import {store} from '../store';
 @use '../assets/mixins' as *;
 @use '../assets/variables' as *;
 .cards{
-    height: 400px;
+    height: 410px;
     overflow-x: auto;
     overflow-y:initial;
     display: flex;

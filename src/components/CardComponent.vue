@@ -1,26 +1,33 @@
 <template>
     
-    <div class="my-card">
+    <div class="my-card" @mouseover="show = true" @mouseleave="show = false">
         <div class="img-box">
             <img :src="urlImage" >
         </div>
         <div class="description">
-            <div class="col-4">
-                <div class="title">
-                    {{originalTitle}}
-                </div>
-                <div class="subtitle">
-                    {{title}}
-                </div>
-                <div>
-                    <i v-for="n in 5" class="fa-star" :class="(n<=vote) ? 'fa-solid' : 'fa-regular'"></i>
-                </div>
-                <img :src="flag">
+            <div class="title col-12">
+                {{originalTitle}}
             </div>
-            <div class="info col-8">
-                {{card.overview}}
+            <div :class="{'col-4': show}">
+                <Transition name="fade">
+                    <div class="subtitle" v-show="show">
+                        {{title}}
+                    </div>
+                </Transition>
+                <Transition name="fade">
+                    <div v-show="show">
+                        <i v-for="n in 5" class="fa-star" :class="(n<=vote) ? 'fa-solid' : 'fa-regular'"></i>
+                    </div>
+                </Transition>
+                <Transition name="fade">
+                    <img :src="flag" v-show="show">
+                </Transition>
             </div>
-            
+            <Transition name="fade">
+                <div class="info col-8" v-show="show">
+                    {{card.overview}}
+                </div>
+            </Transition>
         </div>
     </div>
     
@@ -31,7 +38,8 @@ import {store} from '../store'
     export default {
         data(){
             return{
-                store
+                store,
+                show: false
             }
         },
         props:['card'],
@@ -61,9 +69,13 @@ import {store} from '../store'
                     flag = 'cn';
                 }else if(flag == 'ko') {
                     flag = 'kr';             
+                }else if (flag == 'cs') {
+                    flag = 'sk';             
+                } else if (flag == 'da') {
+                    flag = 'dk';             
                 }
                 const flagUp = flag.toUpperCase();
-                const urlFlag = `https://www.countryflagicons.com/SHINY/64/${flagUp}.png`
+                const urlFlag = `https://www.countryflagicons.com/SHINY/32/${flagUp}.png`
                 return urlFlag;
             }
         }
@@ -80,12 +92,14 @@ import {store} from '../store'
     position: relative;
     transition: 0.5s;
     z-index: 50;
+    // transform: scale(2);
+    // transform-origin: top left;
     &:hover{
-        transform: scale(1.4);
+        transform: scale(1.5);
         transform-origin: top left;
         z-index: 100;
         .description{
-            height: 90%;
+            height: 100%;
         }
     }
     .img-box{
@@ -105,10 +119,13 @@ import {store} from '../store'
         background: linear-gradient(180deg, rgba(207, 207, 207, 0) 1%, rgba(0, 0, 0, 1) 40%);
         color: $white;
         display: flex;
+        flex-wrap: wrap;
         transition: 0.5s;
+        padding-left: 0.5rem;
+        padding-bottom: 0.5rem;
         .title{
             padding: 0 0.1rem 0.3rem;
-            font-size: 1.3rem;
+            font-size: 2rem;
             font-weight: bold;
         }
         .subtitle{
@@ -117,10 +134,21 @@ import {store} from '../store'
         .info{
             padding: 0 0.5rem 0.5rem;
             overflow: auto;
+            height: 100%;
             &::-webkit-scrollbar {
             display: none;
             }
         }
+    }
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: all 0.5s ;
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+        opacity: 0;
+        transform: translateX(30px);
     }
 }
 
