@@ -6,25 +6,30 @@
 <script>
 import MainComponent from './components/MainComponent.vue';
 import NavbarCoponent from './components/NavbarCoponent.vue';
-// import axios from 'axios';
-  export default {
-    data(){
-      return{
+import {store} from './store';
+import axios from 'axios';
+export default {
+  data(){
+    return{
+      options:{
+        params:{
+          api_key : '1829456f16e7707f91a23d5cca10ada9',
+        }
       }
-    },
-    methods:{
-      // getApi(){
-      //   const urlMovie = store.apiUrl + this.EndPointMovie;
-      //   axios.get(urlMovie,store.options).then((res)=>{
-      //     store.listMovie = [...res.data.results];
-      //     console.log(res.data.results);
-      //   })
-      // }
-    },
-    created(){
-      // this.getApi();
-    },
-    components: { NavbarCoponent, MainComponent }
+    }
+  },
+  methods:{
+    getGender(){
+      axios.get(store.genderUrl,this.options).then((res)=>{
+        store.listGender = [...res.data.genres];
+        console.log(res.data.genres);
+      })
+    }
+  },
+  created(){
+    this.getGender();
+  },
+  components: { NavbarCoponent, MainComponent }
 }
 </script>
 

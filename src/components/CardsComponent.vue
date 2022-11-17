@@ -29,7 +29,7 @@ import {store} from '../store';
             const url = store.apiUrl + this.endPoint;
             axios.get(url,store.options).then((res)=>{
                 this.list = [...res.data.results];
-                console.log(res.data.results);
+                // console.log(res.data.results);
             }).catch((error)=>{
                 console.log(error.message)
             })

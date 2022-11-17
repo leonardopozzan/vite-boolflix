@@ -10,17 +10,17 @@
             </div>
             <div :class="{'col-4': show}">
                 <Transition name="fade">
-                    <div class="subtitle" v-show="show">
-                        {{title}}
-                    </div>
-                </Transition>
-                <Transition name="fade">
                     <div v-show="show">
                         <i v-for="n in 5" class="fa-star" :class="(n<=vote) ? 'fa-solid' : 'fa-regular'"></i>
                     </div>
                 </Transition>
                 <Transition name="fade">
                     <img :src="flag" v-show="show">
+                </Transition>
+                <Transition name="fade" v-for="(el,i) in store.listGender">
+                    <div class="subtitle" v-show="show" v-if="card.genre_ids.includes(el.id)">
+                        {{el.name}}
+                    </div>
                 </Transition>
             </div>
             <Transition name="fade">
@@ -75,6 +75,10 @@ import {store} from '../store'
                     flag = 'dk';             
                 } else if (flag == 'xx'){
                     flag = 'mz';
+                } else if (flag == 'hi'){
+                    flag = 'fj';
+                } else if (flag == 'ta'){
+                    flag = 'tw';
                 }
                 const flagUp = flag.toUpperCase();
                 const urlFlag = `https://www.countryflagicons.com/SHINY/32/${flagUp}.png`
@@ -94,14 +98,13 @@ import {store} from '../store'
     position: relative;
     transition: 0.5s;
     z-index: 50;
-    // transform: scale(2);
-    // transform-origin: top left;
     &:hover{
-        transform: scale(1.5);
+        transform: scale(1.4);
         transform-origin: top left;
         z-index: 100;
         .description{
             height: 100%;
+            width: 100%;
         }
     }
     .img-box{

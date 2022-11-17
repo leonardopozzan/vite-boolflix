@@ -14,7 +14,7 @@ import {store} from '../store';
             return{
                 store,
                 listEndPoint: ['/search/movie','/search/tv'],
-                listTrend: ['/trending/tv/week', '/trending/movie/week' ]
+                listTrend: ['/trending/movie/week', '/trending/tv/week']
             }
         },
         components:  { CardsComponent } 
