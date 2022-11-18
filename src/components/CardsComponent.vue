@@ -19,7 +19,8 @@ import {store} from '../store';
         data(){
             return{
                 store,
-                list:[]
+                list:[],
+                listCopy: []
             }
         },
     components: { CardComponent },
@@ -28,6 +29,9 @@ import {store} from '../store';
         //prendendolo dalla barra input della navbar
         'store.options.params.query'(){
             this.getApi();
+        },
+        'store.genreFilter'(){
+            this.toFilterByGenre();
         }
     },
     props: ['endPoint'],
@@ -37,11 +41,16 @@ import {store} from '../store';
             const url = store.apiUrl + this.endPoint;
             axios.get(url,store.options).then((res)=>{
                 this.list = [...res.data.results];
+                this.listCopy = [...res.data.results];
                 // console.log(res.data.results);
             }).catch((error)=>{
                 console.log(error.message)
             })
         },
+        toFilterByGenre(){
+            this.list = this.listCopy.filter((el)=>el.genre_ids.includes(store.genreFilter))
+        },
+        //funzioni per scrollare a destra e sinistra i film e serie
         scrollLeft() {
         const element = this.$refs.cards;
         console.log(element)

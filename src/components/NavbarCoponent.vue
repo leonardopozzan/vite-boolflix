@@ -7,7 +7,7 @@
                     <li><a href="#nogo">Home</a></li>
                     <li><a href="#serie-tv">Serie TV</a></li>
                     <li><a href="#film">Film</a></li>
-                    <li><a href="#nogo">Generi</a><i class="fa-solid fa-chevron-down arrow-down" @click="showMenu()"></i> </li>
+                    <li @click="showMenu()"><a href="#nogo">Generi</a><i class="fa-solid fa-chevron-down arrow-down" :class="{'rotate' : show}"></i> </li>
                 </ul>
             </div>
             <div class="me-5 d-flex align-items-center">
@@ -17,7 +17,7 @@
         </nav>
         <div class="menu" :class="{'show' : show}">
             <ul class="genres">
-                <li v-for="(el, i) in store.listGenres" :key="el.id">{{el.name}}</li>
+                <li v-for="(el, i) in store.listGenres" :key="el.id" @click="toFilterByGenre(el.id)">{{el.name}}</li>
             </ul>
         </div>
     </header>
@@ -40,6 +40,9 @@ import {store} from '../store';
             },
             showMenu(){
                 this.show = !this.show;
+            },//funzione che raccoglie il genre su cui filtrare
+            toFilterByGenre(genreId){
+                store.genreFilter = genreId;
             }
         }
     }
@@ -55,13 +58,15 @@ header{
 }
 .menu{
     height: 0;
-    display: none;
-    transition: height 1s;
+    overflow: hidden;
     background-color: black;
+    transition: 1s;
 }
 .show{
-    display: block;
     height: 130px;
+}
+.rotate{
+    transform: rotate(180deg);
 }
 .genres{
     width: 80%;
@@ -117,6 +122,8 @@ nav{
     .arrow-down{
         color: white;
         cursor: pointer;
+        transition: 1s;
+        font-size: 1.2rem;
     }
     
 }

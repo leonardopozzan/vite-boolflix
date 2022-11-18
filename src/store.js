@@ -10,5 +10,6 @@ export const store = reactive({
             api_key : '1829456f16e7707f91a23d5cca10ada9',
             query: ''
         }
-    }
+    },
+    genreFilter: 0
 })

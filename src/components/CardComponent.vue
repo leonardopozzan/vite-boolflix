@@ -21,7 +21,7 @@
                     </section>
                     <section class="subtitle">
                         <div>Descrizione:</div>
-                        <div v-show="show">
+                        <div>
                             {{card.overview}}
                         </div>
                     </section>
