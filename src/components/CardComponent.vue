@@ -1,32 +1,37 @@
 <template>
     
-    <div class="my-card" @mouseover="show = true" @mouseleave="show = false">
+    <div class="my-card" @mouseover="show = true" @mouseleave="show = false" @mouseover.once="getActors()">
         <div class="img-box">
             <img :src="urlImage" >
         </div>
         <div class="mask"></div>
         <div class="description">
-            <div class="title col-12">
+            <div class="title">
                 {{originalTitle}}
             </div>
-            <div :class="{'col-4': show}">
-                <Transition name="fade">
-                    <div v-show="show">
-                        <i v-for="n in 5" class="fa-star" :class="(n<=vote) ? 'fa-solid' : 'fa-regular'"></i>
-                    </div>
-                </Transition>
-                <Transition name="fade">
-                    <img :src="flag" v-show="show">
-                </Transition>
-                <Transition name="fade" v-for="(el,i) in store.listGenres">
-                    <div class="subtitle" v-show="show" v-if="card.genre_ids.includes(el.id)">
-                        {{el.name}}
-                    </div>
-                </Transition>
-            </div>
             <Transition name="fade">
-                <div class="info col-8" v-show="show">
-                    {{card.overview}}
+                <div v-show="show">
+                    <section>
+                        <i v-for="n in 5" class="fa-star" :class="(n<=vote) ? 'fa-solid' : 'fa-regular'"></i>
+                        <img :src="flag" >
+                    </section>
+                    <section class="subtitle">
+                        <div  v-for="(el,i) in store.listGenres" :key="el.id" v-show="card.genre_ids.includes(el.id)">
+                            {{el.name}}
+                        </div>
+                    </section>
+                    <section class="subtitle">
+                        <div>Descrizione:</div>
+                        <div v-show="show">
+                            {{card.overview}}
+                        </div>
+                    </section>
+                    <section class="subtitle">
+                        <div>Attori:</div>
+                        <span v-for="(actor,k) in actorsList" :key="actor.id" v-show="k <=4" class="actor-name" :class="{'comma': k<=3}">
+                            {{actor.name}}
+                        </span>
+                    </section>
                 </div>
             </Transition>
         </div>
@@ -35,12 +40,19 @@
 </template>
 
 <script>
-import {store} from '../store'
+import {store} from '../store';
+import axios from 'axios';
     export default {
         data(){
             return{
                 store,
-                show: false
+                show: false,
+                actorsList: [],
+                options:{
+                    params:{
+                    api_key : '1829456f16e7707f91a23d5cca10ada9',
+                    }
+                }
             }
         },
         props:['card'],
@@ -59,6 +71,13 @@ import {store} from '../store'
             },
             vote(){
                 return Math.round(this.card.vote_average/2);
+            },
+            endPointActros(){
+                if(this.card.title){
+                    return `/movie/${this.card.id}/credits`
+                }else{
+                    return `/tv/${this.card.id}/credits`
+                }
             },
             flag(){
                 let flag = this.card.original_language;
@@ -84,6 +103,15 @@ import {store} from '../store'
                 const flagUp = flag.toUpperCase();
                 const urlFlag = `https://www.countryflagicons.com/SHINY/32/${flagUp}.png`
                 return urlFlag;
+            }
+        },
+        methods: {
+            getActors(){
+                const url = store.apiUrl + this.endPointActros
+                axios.get(url,this.options).then((res)=>{
+                    this.actorsList = [...res.data.cast];
+                    // console.log(res.data.cast)
+                })
             }
         }
     }
@@ -135,29 +163,25 @@ import {store} from '../store'
         height: 100px;
         background: linear-gradient(180deg, rgba(207, 207, 207, 0) 1%, rgba(0, 0, 0, 1) 40%);
         color: $white;
-        display: flex;
-        flex-wrap: wrap;
         transition: 0.5s;
         padding: 0.5rem;
         &::-webkit-scrollbar {
             display: none;
             }
+        section{
+            padding-top: 0.4rem;
+        }
         .title{
-            padding-bottom: 0.3rem;
             font-size: 1.7rem;
             font-weight: bold;
         }
         .subtitle{
             font-size: 0.8rem;
         }
-        .info{
-            font-size: 0.7rem;
-            padding-left: 0.5rem;
-            overflow: auto;
-            &::-webkit-scrollbar {
-            display: none;
-            }
+        .comma::after{
+            content: ', ';
         }
+        
     }
     .fade-enter-active,
     .fade-leave-active {

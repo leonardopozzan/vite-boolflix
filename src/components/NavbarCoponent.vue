@@ -4,10 +4,10 @@
             <div class="d-flex align-items-center ms-5">
                 <div class="img-box"><img src="/img/boolflix.png"></div>
                 <ul class="d-flex m-0">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Serie TV</a></li>
-                    <li><a href="#">Film</a></li>
-                    <li><a href="#">Nuovi e popolari</a></li>
+                    <li><a href="#nogo">Home</a></li>
+                    <li><a href="#nogo">Serie TV</a></li>
+                    <li><a href="#nogo">Film</a></li>
+                    <li><a href="#nogo">Nuovi e popolari</a></li>
                 </ul>
             </div>
             <div class="me-5 d-flex align-items-center">
@@ -59,7 +59,6 @@ nav{
         background-color: $bg-dark;
         color: $white;
         width: 300px;
-
         border: 0;
         height: 40px;
         font-size: 1.3rem;

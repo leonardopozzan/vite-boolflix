@@ -1,7 +1,7 @@
 <template>
     <main>
-        <CardsComponent v-for="(el,i) in listEndPoint" :key="i" :endPoint="el" v-if="store.options.params.query" />
-        <CardsComponent v-for="(el,j) in listTrend" :key="j" :endPoint="el" v-else />
+        <CardsComponent v-for="(el,i) in store.listEndPoint" :key="i" :endPoint="el" v-if="store.options.params.query" />
+        <CardsComponent v-for="(el,j) in store.listTrend" :key="j" :endPoint="el" v-else />
     </main>
 </template>
 
@@ -12,9 +12,7 @@ import {store} from '../store';
     export default {
         data(){
             return{
-                store,
-                listEndPoint: ['/search/movie','/search/tv'],
-                listTrend: ['/trending/movie/week', '/trending/tv/week']
+                store
             }
         },
         components:  { CardsComponent } 

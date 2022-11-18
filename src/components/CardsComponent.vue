@@ -66,9 +66,6 @@ import {store} from '../store';
     display: flex;
     align-items: flex-start;
     padding-top: 2rem;
-    &::-webkit-scrollbar {
-    display: none;
-}
 }
 .title{
     font-size: 3.5rem;
