@@ -7,7 +7,7 @@
                     <li><a href="#nogo">Home</a></li>
                     <li><a href="#serie-tv">Serie TV</a></li>
                     <li><a href="#film">Film</a></li>
-                    <li><a href="#nogo">Generi</a><i class="fa-solid fa-chevron-down arrow-down" @click="showGenres()"></i> </li>
+                    <li><a href="#nogo">Generi</a><i class="fa-solid fa-chevron-down arrow-down" @click="showMenu()"></i> </li>
                 </ul>
             </div>
             <div class="me-5 d-flex align-items-center">
@@ -15,9 +15,11 @@
                 <button class="my-btn" @click="change()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </nav>
-        <ul class="genres">
-            <li v-for="(el, i) in store.listGenres" :key="el.id">{{el.name}}</li>
-        </ul>
+        <div class="menu" :class="{'show' : show}">
+            <ul class="genres">
+                <li v-for="(el, i) in store.listGenres" :key="el.id">{{el.name}}</li>
+            </ul>
+        </div>
     </header>
 </template>
 
@@ -27,13 +29,17 @@ import {store} from '../store';
         data(){
             return{
                 store,
-                input : ''
+                input : '',
+                show : false
             }
         },
         methods:{
             //funzione che associa il testo al filtro per la ricerca quando viene premuto il bottone
             change(){
                 store.options.params.query = this.input;
+            },
+            showMenu(){
+                this.show = !this.show;
             }
         }
     }
@@ -47,9 +53,33 @@ header{
     position: relative;
     border-bottom: 2px solid red ;
 }
+.menu{
+    height: 0;
+    display: none;
+    transition: height 1s;
+    background-color: black;
+}
+.show{
+    display: block;
+    height: 130px;
+}
 .genres{
+    width: 80%;
+    margin: auto;
     color: white;
-    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem 0;
+    li{
+        cursor: pointer;
+        font-size: 1.3rem;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        &:hover{
+            background-color: rgba($color: red, $alpha: 0.4);
+        }
+    }
 }
 nav{
     height: 80px;
@@ -57,10 +87,12 @@ nav{
     .img-box{
         width: 150px;
     }
+    ul{
+        font-size: 1.3rem;
+    }
     a{
         text-decoration: none;
         color: $white;
-        font-size: 1.2rem;
         padding-right: 1rem;
     }
     input{
@@ -86,5 +118,6 @@ nav{
         color: white;
         cursor: pointer;
     }
+    
 }
 </style>
