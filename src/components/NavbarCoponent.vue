@@ -5,9 +5,9 @@
                 <div class="img-box"><img src="/img/boolflix.png"></div>
                 <ul class="d-flex m-0">
                     <li><a href="#nogo">Home</a></li>
-                    <li><a href="#nogo">Serie TV</a></li>
-                    <li><a href="#nogo">Film</a></li>
-                    <li><a href="#nogo">Nuovi e popolari</a></li>
+                    <li><a href="#serie-tv">Serie TV</a></li>
+                    <li><a href="#film">Film</a></li>
+                    <li><a href="#nogo">Generi</a><i class="fa-solid fa-chevron-down arrow-down" @click="showGenres()"></i> </li>
                 </ul>
             </div>
             <div class="me-5 d-flex align-items-center">
@@ -15,6 +15,9 @@
                 <button class="my-btn" @click="change()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </nav>
+        <ul class="genres">
+            <li v-for="(el, i) in store.listGenres" :key="el.id">{{el.name}}</li>
+        </ul>
     </header>
 </template>
 
@@ -43,6 +46,10 @@ header{
     z-index: 700;
     position: relative;
     border-bottom: 2px solid red ;
+}
+.genres{
+    color: white;
+    
 }
 nav{
     height: 80px;
@@ -74,6 +81,10 @@ nav{
         &:hover{
             background-color: rgba($color: white, $alpha: 0.3);
         }
+    }
+    .arrow-down{
+        color: white;
+        cursor: pointer;
     }
 }
 </style>

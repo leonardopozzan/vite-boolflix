@@ -1,8 +1,13 @@
 <template>
-    <div class="title view" v-show="list.length">{{title}}</div> 
-    <div class="cards view">
-        <CardComponent v-for="(item,j) in list" :key="j" :card="item"/>
+    <div class="title view" v-show="list.length" :id="titleId">
+        <i class="fa-solid fa-chevron-left arrow-left" @click="scrollLeft()"></i> 
+        {{title}}
+        <i class="fa-solid fa-chevron-right arrow-right" @click="scrollRight()"></i>
     </div>
+    <div class="cards view" ref="cards">
+        <CardComponent v-for="(item,j) in list" :key="j" :card="item" />
+    </div>
+    
 </template>
 
 <script>
@@ -36,6 +41,15 @@ import {store} from '../store';
             }).catch((error)=>{
                 console.log(error.message)
             })
+        },
+        scrollLeft() {
+        const element = this.$refs.cards;
+        console.log(element)
+        element.scrollBy({left: -1000,behavior: "smooth",});
+        },
+        scrollRight() {
+            const element = this.$refs.cards;
+            element.scrollBy({left: 1000,behavior: "smooth",});
         }
     },
     computed:{
@@ -51,6 +65,13 @@ import {store} from '../store';
                     return 'Trend Film'
                 }
                 return 'Film';
+            }
+        },
+        titleId(){
+            if(this.endPoint.includes('tv')){
+                return 'serie-tv';
+            }else if(this.endPoint.includes('movie')){
+                return 'film';
             }
         }
     },
@@ -71,6 +92,9 @@ import {store} from '../store';
     display: flex;
     align-items: flex-start;
     padding-top: 2rem;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 .title{
     font-size: 3.5rem;
@@ -80,6 +104,18 @@ import {store} from '../store';
 }
 .view{
         position: relative;
-        z-index: 600;
+        z-index: 300;
     }
+
+.arrow-left, .arrow-right{
+    color: $white;
+    font-size: 3rem;
+    z-index: 400;
+    width: 50px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    cursor: pointer;
+}
+
 </style>
