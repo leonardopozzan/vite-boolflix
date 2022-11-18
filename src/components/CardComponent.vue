@@ -1,5 +1,4 @@
 <template>
-    
     <div class="my-card" @mouseover="show = true" @mouseleave="show = false" @mouseover.once="getActors()">
         <div class="img-box">
             <img :src="urlImage" >
@@ -57,28 +56,29 @@ import axios from 'axios';
         },
         props:['card'],
         computed:{
+            //trovo la url dell'immagine e se non esiste metto il logo di boolflix di default
             urlImage(){
                 const urlImage = (this.card.backdrop_path) ? `${store.imgUrl}${this.card.backdrop_path}` : '/img/boolflix.png';
                 return urlImage;
-            },
+            },//trovo il titolo distinguendo tra serie tv e movie
             title(){
-                const title = (this.card.title) ? this.card.title : this.card.name;
+                const title =  this.card.title || this.card.name;
                 return title;
-            },
+            },//trovo il titolo originale distinguendo tra serie tv e movie
             originalTitle(){
-                const originalTitle = (this.card.original_title) ? this.card.original_title : this.card.original_name;
+                const originalTitle = this.card.original_title || this.card.original_name;
                 return originalTitle;
-            },
+            },//calcolo il voto su 5 al posto che in deimale
             vote(){
                 return Math.round(this.card.vote_average/2);
-            },
+            },//costruisco l'endpoint per gli attori distinguendo tra serie e movie
             endPointActros(){
                 if(this.card.title){
                     return `/movie/${this.card.id}/credits`
                 }else{
                     return `/tv/${this.card.id}/credits`
                 }
-            },
+            },// trovo l'url per l'immagine delle bandiere prendendole da un api esterna e gestendo tutti i casi comuni in cui non trova la bandiera
             flag(){
                 let flag = this.card.original_language;
                 if(flag == 'en'){
@@ -106,6 +106,7 @@ import axios from 'axios';
             }
         },
         methods: {
+            //chiamo la lista degli attori della serie o film
             getActors(){
                 const url = store.apiUrl + this.endPointActros
                 axios.get(url,this.options).then((res)=>{
@@ -122,7 +123,7 @@ import axios from 'axios';
 @use '../assets/variables' as *;
 .my-card{
     flex-shrink: 0;
-    background-color: black;
+    background-color: $black;
     margin: 0 0.6rem;
     position: relative;
     transition: 0.5s;
@@ -141,9 +142,9 @@ import axios from 'axios';
         }
     }
     .mask{
+        background-color: $black;
         height: 0.5rem;
         width: 100%;
-        background-color: black;
         z-index: 200;
         position: absolute;
         bottom: 0; left: 0;
@@ -157,11 +158,11 @@ import axios from 'axios';
         }
     }
     .description{
+        background: linear-gradient(180deg, rgba(207, 207, 207, 0) 1%, rgba(0, 0, 0, 1) 40%);
         position: absolute;
         bottom: 0; left: 0;
         width: 100%;
         height: 100px;
-        background: linear-gradient(180deg, rgba(207, 207, 207, 0) 1%, rgba(0, 0, 0, 1) 40%);
         color: $white;
         transition: 0.5s;
         padding: 0.5rem;

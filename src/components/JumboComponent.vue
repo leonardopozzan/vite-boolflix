@@ -22,7 +22,6 @@
         left: 0;
         top:0;
         min-width: 100%;
-        // min-height: 100%;
     }
 }
 

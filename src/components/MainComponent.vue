@@ -1,7 +1,9 @@
 <template>
     <main>
-        <CardsComponent v-for="(el,i) in store.listEndPoint" :key="i" :endPoint="el" v-if="store.options.params.query" />
-        <CardsComponent v-for="(el,j) in store.listTrend" :key="j" :endPoint="el" v-else />
+        <!-- componenti che stampano a schermo la lsta dei film o serie in base agli enpoint che gli passo -->
+        <!-- con il v-if mostro uno o l'altro in base al fatto che l'utente abbia fatto la ricerca o meno -->
+        <CardsComponent v-for="(el,i) in listEndPoint" :key="i" :endPoint="el" v-if="store.options.params.query" />
+        <CardsComponent v-for="(el,j) in listTrend" :key="j" :endPoint="el" v-else />
     </main>
 </template>
 
@@ -12,7 +14,9 @@ import {store} from '../store';
     export default {
         data(){
             return{
-                store
+                store,
+                listEndPoint: ['/search/movie','/search/tv'],
+                listTrend: ['/trending/movie/week', '/trending/tv/week'],
             }
         },
         components:  { CardsComponent } 

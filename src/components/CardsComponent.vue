@@ -19,12 +19,15 @@ import {store} from '../store';
         },
     components: { CardComponent },
     watch: {
+        //fa partire la chiamata api quando il bottone ricerca viene premuto e viene associato un vaolre a query 
+        //prendendolo dalla barra input della navbar
         'store.options.params.query'(){
             this.getApi();
         }
     },
     props: ['endPoint'],
     methods:{
+        //funzione che chiama l'api in funzione dell'endoint che riceve dal padre
         getApi(){
             const url = store.apiUrl + this.endPoint;
             axios.get(url,store.options).then((res)=>{
@@ -36,6 +39,7 @@ import {store} from '../store';
         }
     },
     computed:{
+        //controllo sul titolo dell sezione in base al contenuto dell'endopoint
         title(){
             if(this.endPoint.includes('tv')){
                 if(this.endPoint.includes('trending')){
@@ -51,6 +55,7 @@ import {store} from '../store';
         }
     },
     mounted(){
+        // chiamata di default all'api con gli end point del trending
         this.getApi();
     }
 }

@@ -28,6 +28,7 @@ import {store} from '../store';
             }
         },
         methods:{
+            //funzione che associa il testo al filtro per la ricerca quando viene premuto il bottone
             change(){
                 store.options.params.query = this.input;
             }

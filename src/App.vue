@@ -22,6 +22,7 @@ export default {
     }
   },
   methods:{
+    //funzione che mi restituisce la lista di tutti i generi dei film e serie tv
     getGenres(){
       axios.get(store.genresUrl,this.options).then((res)=>{
         store.listGenres = [...res.data.genres];
