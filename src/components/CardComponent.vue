@@ -18,7 +18,7 @@
                 <Transition name="fade">
                     <img :src="flag" v-show="show">
                 </Transition>
-                <Transition name="fade" v-for="(el,i) in store.listGender">
+                <Transition name="fade" v-for="(el,i) in store.listGenres">
                     <div class="subtitle" v-show="show" v-if="card.genre_ids.includes(el.id)">
                         {{el.name}}
                     </div>

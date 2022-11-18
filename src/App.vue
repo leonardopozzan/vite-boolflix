@@ -22,15 +22,15 @@ export default {
     }
   },
   methods:{
-    getGender(){
-      axios.get(store.genderUrl,this.options).then((res)=>{
-        store.listGender = [...res.data.genres];
+    getGenres(){
+      axios.get(store.genresUrl,this.options).then((res)=>{
+        store.listGenres = [...res.data.genres];
         // console.log(res.data.genres);
       })
     }
   },
   created(){
-    this.getGender();
+    this.getGenres();
   },
   components: { NavbarCoponent, MainComponent, JumboComponent }
 }
