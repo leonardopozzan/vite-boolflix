@@ -4,6 +4,7 @@
         <div class="img-box">
             <img :src="urlImage" >
         </div>
+        <div class="mask"></div>
         <div class="description">
             <div class="title col-12">
                 {{originalTitle}}
@@ -108,11 +109,20 @@ import {store} from '../store'
         .description{
             height: 100%;
             width: 100%;
+            overflow: auto;
         }
     }
+    .mask{
+        height: 0.5rem;
+        width: 100%;
+        background-color: black;
+        z-index: 200;
+        position: absolute;
+        bottom: 0; left: 0;
+    }
     .img-box{
-        width: 445px;
-        height: 250px;
+        width: 360px;
+        height: 200px;
         img{
             height: 100%;
             width: 100%;
@@ -123,26 +133,27 @@ import {store} from '../store'
         bottom: 0; left: 0;
         width: 100%;
         height: 100px;
-        overflow: hidden;
         background: linear-gradient(180deg, rgba(207, 207, 207, 0) 1%, rgba(0, 0, 0, 1) 40%);
         color: $white;
         display: flex;
         flex-wrap: wrap;
         transition: 0.5s;
-        padding-left: 0.5rem;
-        padding-bottom: 0.5rem;
+        padding: 0.5rem;
+        &::-webkit-scrollbar {
+            display: none;
+            }
         .title{
-            padding: 0 0.1rem 0.3rem;
-            font-size: 2rem;
+            padding-bottom: 0.3rem;
+            font-size: 1.7rem;
             font-weight: bold;
         }
         .subtitle{
-            padding: 0 0.1rem 0.3rem;
+            font-size: 0.8rem;
         }
         .info{
-            padding: 0 0.5rem 0.5rem;
+            font-size: 0.7rem;
+            padding-left: 0.5rem;
             overflow: auto;
-            height: 100%;
             &::-webkit-scrollbar {
             display: none;
             }

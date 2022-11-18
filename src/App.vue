@@ -25,7 +25,7 @@ export default {
     getGender(){
       axios.get(store.genderUrl,this.options).then((res)=>{
         store.listGender = [...res.data.genres];
-        console.log(res.data.genres);
+        // console.log(res.data.genres);
       })
     }
   },
