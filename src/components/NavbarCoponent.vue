@@ -89,7 +89,7 @@ header{
     color: white;
 }
 .show{
-    height: 130px;
+    height: initial;
 }
 .rotate{
     transform: rotate(180deg);

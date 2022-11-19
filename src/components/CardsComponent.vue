@@ -146,6 +146,8 @@ import {store} from '../store';
     padding-left: 1rem;
     font-size: 4rem;
     color: $white;
+    position: relative;
+    z-index: 50;
 }
 
 </style>
