@@ -1,11 +1,14 @@
 <template>
-    <div class="title view" v-show="list.length" :id="titleId">
+    <div class="title view" v-show="listCopy.length" :id="titleId">
         <i class="fa-solid fa-chevron-left arrow-left" @click="scrollLeft()"></i> 
         {{title}}
         <i class="fa-solid fa-chevron-right arrow-right" @click="scrollRight()"></i>
     </div>
-    <div class="cards view" ref="cards">
+    <div class="cards view" ref="cards" v-if="list.length">
         <CardComponent v-for="(item,j) in list" :key="j" :card="item" />
+    </div>
+    <div v-else class="text-white"> 
+        Non ci sono Titoli con questi generi
     </div>
     
 </template>
@@ -20,7 +23,8 @@ import {store} from '../store';
             return{
                 store,
                 list:[],
-                listCopy: []
+                listCopy: [],
+                length : store.genreFilter
             }
         },
     components: { CardComponent },
@@ -30,7 +34,7 @@ import {store} from '../store';
         'store.options.params.query'(){
             this.getApi();
         },
-        'store.genreFilter'(){
+        'store.toggle'(){
             this.toFilterByGenre();
         }
     },
@@ -48,7 +52,17 @@ import {store} from '../store';
             })
         },
         toFilterByGenre(){
-            this.list = this.listCopy.filter((el)=>el.genre_ids.includes(store.genreFilter))
+            this.list = this.listCopy.filter((el)=>{
+                if(!store.genreFilter.length){
+                    return true
+                }
+                for(let i = 0; i < store.genreFilter.length; i++){
+                    if(el.genre_ids.includes(store.genreFilter[i])){
+                        return true
+                    }
+                }
+                return false
+            })
         },
         //funzioni per scrollare a destra e sinistra i film e serie
         scrollLeft() {

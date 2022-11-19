@@ -15,9 +15,9 @@
                 <button class="my-btn" @click="change()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </nav>
-        <div class="menu" :class="{'show' : show}">
+        <div class="menu" :class="{'show' : show}" ref="menu">
             <ul class="genres">
-                <li v-for="(el, i) in store.listGenres" :key="el.id" @click="toFilterByGenre(el.id)">{{el.name}}</li>
+                <li v-for="(el,i) in store.listGenres" :key="i" @click="toFilterByGenre(el.id)" :class="{'active': store.genreFilter.includes(el.id)}">{{el.name}}</li>
             </ul>
         </div>
     </header>
@@ -25,6 +25,7 @@
 
 <script>
 import {store} from '../store';
+import { h } from 'vue';
     export default {
         data(){
             return{
@@ -42,8 +43,32 @@ import {store} from '../store';
                 this.show = !this.show;
             },//funzione che raccoglie il genre su cui filtrare
             toFilterByGenre(genreId){
-                store.genreFilter = genreId;
+                store.toggle = !store.toggle;
+                if(store.genreFilter.includes(genreId)){
+                    const i = store.genreFilter.indexOf(genreId);
+                    store.genreFilter.splice(i,1);
+                }else{
+                    store.genreFilter.unshift(genreId);
+                }
             }
+        },
+        mounted(){
+        //     const list=  h(
+        //         'ul',
+        //         this.store.listGenres.map(({ id, text }) => {
+        //             return h('li', { key: id }, text)
+        //         })
+        //     )
+        //     console.log(list)
+        //     const menu = this.$refs.menu;
+        //     menu.children.push(list)
+        // }
+        // mounted(){
+        //     const menu = this.$refs.menu;
+        //     menu.innerHTML = `
+        //     <ul class="genres">
+        //         <li v-for="(el,i) in store.listGenres" :key="i" @click="toFilterByGenre(el.id)"><span :ref="el.id">{{el.name}}</span></li>
+        //     </ul>`
         }
     }
 </script>
@@ -61,6 +86,7 @@ header{
     overflow: hidden;
     background-color: black;
     transition: 1s;
+    color: white;
 }
 .show{
     height: 130px;
@@ -71,7 +97,6 @@ header{
 .genres{
     width: 80%;
     margin: auto;
-    color: white;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -84,6 +109,9 @@ header{
         &:hover{
             background-color: rgba($color: red, $alpha: 0.4);
         }
+    }
+    .active{
+        background-color: rgba($color: red, $alpha: 0.4);
     }
 }
 nav{
