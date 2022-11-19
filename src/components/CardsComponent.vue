@@ -7,8 +7,8 @@
     <div class="cards view" ref="cards" v-if="list.length">
         <CardComponent v-for="(item,j) in list" :key="j" :card="item" />
     </div>
-    <div v-else class="text-white"> 
-        Non ci sono Titoli con questi generi
+    <div v-else class="message"> 
+        Non ci sono Titoli con questo filtro
     </div>
     
 </template>
@@ -139,6 +139,13 @@ import {store} from '../store';
     line-height: 70px;
     text-align: center;
     cursor: pointer;
+}
+.message{
+    height: 410px;
+    padding-top: 2rem;
+    padding-left: 1rem;
+    font-size: 4rem;
+    color: $white;
 }
 
 </style>

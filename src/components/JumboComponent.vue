@@ -1,8 +1,8 @@
 <template>
     <div class="jumbo">
-        <!-- <video autoplay muted loop id="myVideo">
+        <video autoplay muted loop id="myVideo">
             <source src="/video/trailer.mp4" type="video/mp4">
-        </video> -->
+        </video>
     </div>
 </template>
 
