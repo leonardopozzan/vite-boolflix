@@ -26,7 +26,7 @@
                         </div>
                     </section>
                     <section class="subtitle">
-                        <div>Attori:</div>
+                        <div v-show="actorsList.length">Attori:</div>
                         <span v-for="(actor,k) in actorsList" :key="actor.id" v-show="k <=4" class="actor-name" :class="{'comma': k<=3}">
                             {{actor.name}}
                         </span>
