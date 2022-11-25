@@ -11,6 +11,5 @@ export const store = reactive({
             query: ''
         }
     },
-    genreFilter: [],
-    toggle: true
+    genreFilter: []
 })

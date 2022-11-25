@@ -43,7 +43,6 @@ import { h } from 'vue';
                 this.show = !this.show;
             },//funzione che raccoglie il genre su cui filtrare
             toFilterByGenre(genreId){
-                store.toggle = !store.toggle;
                 if(store.genreFilter.includes(genreId)){
                     const i = store.genreFilter.indexOf(genreId);
                     store.genreFilter.splice(i,1);
@@ -89,7 +88,7 @@ header{
     color: white;
 }
 .show{
-    height: initial;
+    height: 130px;
 }
 .rotate{
     transform: rotate(180deg);
