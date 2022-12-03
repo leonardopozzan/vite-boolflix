@@ -112,11 +112,9 @@ import {store} from '../store';
 @use '../assets/mixins' as *;
 @use '../assets/variables' as *;
 .cards{
-    height: max-content;
-    // height: 410px;
-    // overflow-x: auto;
-    // overflow-y: visible;
-    overflow: visible;
+    height: 410px;
+    overflow-x: auto;
+    overflow-y: visible;
     display: flex;
     align-items: flex-start;
     padding-top: 2rem;

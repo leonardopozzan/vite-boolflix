@@ -88,7 +88,7 @@ header{
     color: white;
 }
 .show{
-    height: max-content;
+    height: 130px;
 }
 .rotate{
     transform: rotate(180deg);
